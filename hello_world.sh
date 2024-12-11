@@ -1,2 +1,6 @@
 #!/bin/bash
-echo"Hello World"
+################
+# Author: Veera Prakash
+# Used for Shell Scripting
+################
+echo "Hello World"
