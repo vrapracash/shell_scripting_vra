@@ -15,7 +15,7 @@ N="\e[0m"
 
 
 CHECK_ROOT(){
-if [ USERID -ne 0]
+if [ USERID -ne 0 ]
 then
     echo -e "$R Use ROOT previlages to installations $N" &>>LOG_FILE
     exit 1
