@@ -61,3 +61,4 @@ if [ $? -ne 0 ]
     VALIDATE $? "Setting up root password"
 else
     echo -e "MYSQL root password is already set. $G Skipping $N" | tee -a $LOG_FILE
+fi
