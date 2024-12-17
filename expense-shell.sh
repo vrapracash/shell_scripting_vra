@@ -56,6 +56,7 @@ systemctl start mysqld &>>$LOG_FILE
 VALIDATE $? "Start mysql server"
 mysql -h mysql.veeraprakash.online --set-root-pass ExpenseApp@1 &>>$LOG_FILE
 if [ $? -ne 0 ]
+then
     echo -e "MySQL root passowrd is not set, $G Setting Password Now $N"
     mysql_secure_installation --set-root-pass ExpenseApp@1
     VALIDATE $? "Setting up root password"
