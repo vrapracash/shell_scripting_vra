@@ -17,7 +17,7 @@ N="\e[0m"
 CHECK_ROOT(){
     if [ $USERID -ne 0 ]
     then
-        echo -e "$R Use ROOT previlages to installations $N" &>>LOG_FILE
+        echo -e "$R Use ROOT previlages to installations $N" | tee -a $LOG_FILE
         exit 1
     fi
 }
@@ -25,10 +25,10 @@ CHECK_ROOT(){
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
-        echo -e "$2 is $R FAILED $N" &>>LOG_FILE
+        echo -e "$2 is $R FAILED $N" | tee -a $LOG_FILE
         exit 1
     else
-        echo -e "$2 is $G SUCCESS... $N" &>>LOG_FILE
+        echo -e "$2 is $G SUCCESS... $N" | tee -a $LOG_FILE
     fi
 }
 
@@ -40,10 +40,10 @@ do
     dnf list installed $package
     if [ $? -ne 0 ]
     then
-        echo -e "$package is not installed, going to $G install $N" &>>LOG_FILE
+        echo -e "$package is not installed, going to $G install $N" | tee -a $LOG_FILE
         dnf install $package -y
         VALIDATE $? "Installing $package"
     else
-        echo -e "$package $G already installed... $N Nothing to do" &>>LOG_FILE
+        echo -e "$package $G already installed... $N Nothing to do" | tee -a $LOG_FILE
     fi
 done
