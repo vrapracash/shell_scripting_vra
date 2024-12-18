@@ -50,10 +50,13 @@ done
 
 dnf install mysql-server -y &>>$LOG_FILE
 VALIDATE $? "Installing mysql-server"
+
 systemctl enable mysqld &>>$LOG_FILE
 VALIDATE $? "Enable mysql server"
+
 systemctl start mysqld &>>$LOG_FILE
 VALIDATE $? "Start mysql server"
+
 mysql -h mysql.veeraprakash.online --set-root-pass ExpenseApp@1 &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
