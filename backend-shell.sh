@@ -90,7 +90,7 @@ VALIDATE $? "Connecting to backend"
 systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "Daemon Reload"
 
-systemctl  eanble backend &>>$LOG_FILE
+systemctl  enable backend &>>$LOG_FILE
 VALIDATE $? "Enabling backend"
 
 systemctl restart backend &>>$LOG_FILE
