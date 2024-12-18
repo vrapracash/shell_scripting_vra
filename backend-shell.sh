@@ -56,3 +56,43 @@ VALIDATE $? "Enable NodeJS 20"
 
 dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "Installing NodeJS"
+
+id expense &>>$LOG_FILE
+if [ $? -ne 0 ]
+then
+    echo -e "$G Expense not available. Creating User$N"
+    useradd expense &>>$LOG_FILE
+    VALIDATE $? "Creating User"
+else
+    echo -e "$R User already available $N"
+fi
+
+mkdir /app
+VALIDATE $? "Creating folder /app"
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE
+VALIDATE $? "Downloading the backend Application"
+
+cd /app
+rm -rf /app/*
+unzip /tmp/backend.zip &>>$LOG_FILE
+VALIDATE $? "Unziping application file"
+
+npm install &>>$LOG_FILE
+cp /home/veera/Downloads/adb_commands/shell-scripting/shell_scripting_vra/backend.service /etc/systemd/system/backend.service
+
+dnf install mysql -y &>>$LOG_FILE
+VALIDATE $? "Installing MySQL"
+
+mysql -h mysql.veeraprakash.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE
+VALIDATE $? "Connecting to backend"
+
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "Daemon Reload"
+
+systemctl  eanble backend &>>$LOG_FILE
+VALIDATE $? "Enabling backend"
+
+systemctl restart backend &>>$LOG_FILE
+VALIDATE $? "Restarting Backend"
+
