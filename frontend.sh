@@ -68,4 +68,8 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$LOG_FILE
 VALIDATE $? "Unzipping Build folder"
 
-cp /home/ec2-user//expense.conf
+cp /home/ec2-user/shell_scripting_vra/expense.conf /etc/nginx/default.d/expense.conf &>>$LOG_FILE
+VALIDATE $? "Copying configuration file"
+
+systemctl restart njginx &>>$LOG_FILE
+VALIDATE $? "Restarting NGINX"

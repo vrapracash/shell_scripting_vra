@@ -79,7 +79,7 @@ unzip /tmp/backend.zip &>>$LOG_FILE
 VALIDATE $? "Unziping application file"
 
 npm install &>>$LOG_FILE
-cp /home/veera/Downloads/adb_commands/shell-scripting/shell_scripting_vra/backend.service /etc/systemd/system/backend.service
+cp /home/ec2-user/shell_scripting_vra/backend.service /etc/systemd/system/backend.service
 
 dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "Installing MySQL"
