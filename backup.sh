@@ -45,7 +45,7 @@ then
     then
         echo "Successfully zipped files older than $DAYS"
         #remove the files after zipping
-        while IFS= read -r file #internal filed separator
+        while IFS= read -r file #internal filed separator. it will ignore white spaces. -r is to not to ignore special charecters
         do
             echo "Deleting files: $FILEs"
             rm -rf $FILES
